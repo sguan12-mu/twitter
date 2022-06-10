@@ -56,7 +56,9 @@
         android:text="TextView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/ivProfileImage"
-        app:layout_constraintTop_toBottomOf="@+id/tvScreenName" />
+        app:layout_constraintTop_toBottomOf="@+id/tvScreenName"
+        android:autoLink="all"
+        android:linksClickable="true" />
 
     <ImageView
         android:id="@+id/entity"
@@ -83,33 +85,46 @@
         app:layout_constraintTop_toBottomOf="@+id/entity"
         app:layout_constraintVertical_bias="0.0" />
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="180dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="2dp"
+        android:tint="#B3B3B3"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/entity"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/ic_vector_retweet_stroke" />
+
     <ImageButton
         android:id="@+id/ibReply"
         android:layout_width="20dp"
         android:layout_height="20dp"
+        android:layout_marginStart="72dp"
         android:layout_marginTop="5dp"
-        android:layout_marginEnd="2dp"
         android:layout_marginBottom="2dp"
         android:background="#00FFFFFF"
         android:scaleType="fitXY"
-        android:tint="#BABABA"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/ibFavorite"
-        app:layout_constraintHorizontal_bias="0.755"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/entity"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/message" />
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/message"
+        app:tint="#A6A6A6" />
 
     <ImageButton
         android:id="@+id/ibFavorite"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:layout_marginStart="110dp"
+        android:layout_marginStart="280dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="2dp"
         android:background="#00000000"
         android:scaleType="fitXY"
+        android:tint="#979797"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/entity"
