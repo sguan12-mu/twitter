@@ -52,9 +52,9 @@ public class ComposeActivity extends AppCompatActivity {
                     Toast.makeText(ComposeActivity.this, "Sorry, your tweet is too long", Toast.LENGTH_LONG).show();
                     return;
                 }
-                Toast.makeText(ComposeActivity.this, tweetContent, Toast.LENGTH_LONG).show();
-                // make an api call to twitter to publish the tweet
-                client.publishTweet(tweetContent, new JsonHttpResponseHandler() {
+                Toast.makeText(ComposeActivity.this, "Sent", Toast.LENGTH_LONG).show();
+
+                JsonHttpResponseHandler handler = new JsonHttpResponseHandler() {
                     @Override
                     public void onSuccess(int statusCode, Headers headers, JSON json) {
                         Log.i(TAG, "onSuccess to publish tweet");
@@ -72,12 +72,22 @@ public class ComposeActivity extends AppCompatActivity {
                         }
 
                     }
-
                     @Override
                     public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
                         Log.e(TAG, "onFailure to publish tweet", throwable);
                     }
-                });
+                };
+
+                // if replying to a tweet:
+                if (getIntent().hasExtra("reply")) {
+                    String idOfTweetToReplyTo = getIntent().getStringExtra("id_of_tweet_to_reply_to");
+                    String nameOfTweetToReplyTo = getIntent().getStringExtra("name_of_tweet_to_reply_to");
+                    client.replyTweet(idOfTweetToReplyTo, "@"+nameOfTweetToReplyTo+" "+tweetContent, handler);
+                }
+                // else, make an api call to twitter to publish the tweet
+                else {
+                    client.publishTweet(tweetContent, handler);
+                }
             }
         });
     }

@@ -1,6 +1,8 @@
 package com.codepath.apps.restclienttemplate;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.icu.text.SimpleDateFormat;
 import android.os.Build;
@@ -120,6 +122,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
         TextView tvTime;
         TextView tvFavorite;
         ImageButton ibFavorite;
+        ImageButton ibReply;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -131,6 +134,8 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
             tvTime = itemView.findViewById(R.id.tvTime);
             ibFavorite = itemView.findViewById(R.id.ibFavorite);
             tvFavorite = itemView.findViewById(R.id.tvFavorite);
+            ibReply = itemView.findViewById(R.id.ibReply);
+
         }
 
         @RequiresApi(api = Build.VERSION_CODES.N)
@@ -205,6 +210,19 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
                         tweet.favoriteCount--;
                         tvFavorite.setText(String.valueOf(tweet.favoriteCount));
                     }
+                }
+            });
+
+            ibReply.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    // pop up a compose screen
+                    // tweet will have an extra attribute since it's a reply
+                    Intent i = new Intent(context, ComposeActivity.class);
+                    i.putExtra("reply", true);
+                    i.putExtra("id_of_tweet_to_reply_to", tweet.id);
+                    i.putExtra("name_of_tweet_to_reply_to", tweet.user.screenName);
+                    ((Activity) context).startActivityForResult(i, TimelineActivity.REQUEST_CODE);
                 }
             });
         }
