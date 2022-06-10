@@ -186,7 +186,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
                     // else, unfavorite the drawable
                     else {
                         // tell twitter to unfavorite
-                        TwitterApp.getRestClient(context).favorite(tweet.id, new JsonHttpResponseHandler() {
+                        TwitterApp.getRestClient(context).unfavorite(tweet.id, new JsonHttpResponseHandler() {
                             @Override
                             public void onSuccess(int statusCode, Headers headers, JSON json) {
                                 Log.i("adapter", "on success");
