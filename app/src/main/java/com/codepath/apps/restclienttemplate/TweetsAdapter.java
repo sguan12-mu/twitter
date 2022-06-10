@@ -147,16 +147,16 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
                 entity.setVisibility(View.GONE);
             }
 
-            tvTime.setText(getRelativeTimeAgo(tweet.createdAt));
+            tvTime.setText(" • "+getRelativeTimeAgo(tweet.createdAt));
 
 
             if (tweet.isFavorited) {
-                 ibFavorite.setImageDrawable(context.getDrawable(R.drawable.ic_vector_heart));
+                 ibFavorite.setImageDrawable(context.getDrawable(R.drawable.fullheart));
             }
             else {
-                ibFavorite.setImageDrawable(context.getDrawable(R.drawable.ic_vector_heart_stroke));
+                ibFavorite.setImageDrawable(context.getDrawable(R.drawable.emptyheart));
             }
-            tvFavorite.setText(tweet.favoriteCount);
+            tvFavorite.setText(String.valueOf(tweet.favoriteCount));
 
             ibFavorite.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -177,7 +177,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
                         });
                         // toggle heart on
                         tweet.isFavorited = true;
-                        Drawable newImage = context.getDrawable(R.drawable.ic_vector_heart);
+                        Drawable newImage = context.getDrawable(R.drawable.fullheart);
                         ibFavorite.setImageDrawable(newImage);
                         // update favorite count
                         tweet.favoriteCount++;
@@ -199,7 +199,7 @@ public class TweetsAdapter extends RecyclerView.Adapter<TweetsAdapter.ViewHolder
                         });
                         // toggle heart off
                         tweet.isFavorited = false;
-                        Drawable newImage = context.getDrawable(R.drawable.ic_vector_heart_stroke);
+                        Drawable newImage = context.getDrawable(R.drawable.emptyheart);
                         ibFavorite.setImageDrawable(newImage);
                         // update favorite count
                         tweet.favoriteCount--;
